@@ -5,6 +5,7 @@ Handle database I/O
 from google.oauth2.service_account import Credentials
 import gspread
 import pandas as pd
+from credential_loader import load_credentials
 
 class DatabaseManager:
     # TODO: add class hierarchy
@@ -20,7 +21,8 @@ class GS_DatabaseManager:
     '''
     def __init__(self, gs_credential_path, gs_url):
         scope = ['https://www.googleapis.com/auth/spreadsheets']
-        creds = Credentials.from_service_account_file(gs_credential_path, scopes=scope)
+        credentials = load_credentials()
+        creds = Credentials.from_service_account_info(credentials, scopes=scope)
         gs = gspread.authorize(creds)
         
         self.sheet_names = []
