@@ -4,13 +4,13 @@ modified from https://steam.oxxostudio.tw/category/python/example/line-webhook.h
 import os
 from flask import Flask, request
 
-# 載入 json 標準函式庫，處理回傳的資料格式
 import json
 
-# 載入 LINE Message API 相關函式庫
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
+
+from text_handler import TextHandler
 
 app = Flask(__name__)
 
@@ -31,6 +31,8 @@ def linebot():
             msg = json_data['events'][0]['message']['text']  # 取得 LINE 收到的文字訊息
             print(msg)                                       # 印出內容
             reply = msg
+            th = TextHandler()
+            reply += th.process_requests(msg)
         else:
             reply = '你傳的不是文字呦～'
         print(reply)

@@ -1,2 +1,7 @@
+# linebot
 line-bot-sdk
 Flask
+# access google sheets
+pandas
+gspread
+google-auth
