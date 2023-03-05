@@ -5,7 +5,7 @@ services:
   env: python
   repo: https://github.com/LiyangTseng/Leftover-Notifier
   buildCommand: pip install gunicorn -r requirements.txt
-  startCommand: gunicorn app:app
+  startCommand: gunicorn main:app
   plan: free
   autoDeploy: false
   envVars:
