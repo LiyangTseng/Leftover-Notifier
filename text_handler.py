@@ -29,7 +29,13 @@ class TextHandler:
 
         # TODO: use hierarchy to use database manager
         info = self.dm.get_sheet_data(sheet_name)
-        return info
+        return self.process_reply(info)
+    
+    def process_reply(self, worksheet_outputs):
+        reply = ""
+        for row in worksheet_outputs:
+            reply += "{}: {}\n".format(row['name'], row['quantity'])
+        return reply
 
     def fuzzy_matching(self, text):
         '''
@@ -40,5 +46,5 @@ class TextHandler:
 if __name__ == "__main__":
     th = TextHandler()
     data = th.process_requests("食材")
-    # data = pd.DㄥataFrame(data)
+    # data = pd.DataFrame(data)
     print(data)

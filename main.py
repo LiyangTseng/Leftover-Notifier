@@ -30,9 +30,8 @@ def linebot():
         if type=='text':
             msg = json_data['events'][0]['message']['text']  # 取得 LINE 收到的文字訊息
             print(msg)                                       # 印出內容
-            reply = msg
             th = TextHandler()
-            reply += th.process_requests(msg)
+            reply = th.process_requests(msg)
         else:
             reply = '你傳的不是文字呦～'
         print(reply)
