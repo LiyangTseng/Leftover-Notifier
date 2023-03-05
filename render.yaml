@@ -1,7 +1,7 @@
 # modified from https://github.com/haojiwu/line-bot-python-on-render/blob/master/render.yaml
 services:
 - type: web
-  name: line-bot-python-flask
+  name: samtsai-line-bot-python-flask
   env: python
   repo: https://github.com/LiyangTseng/Leftover-Notifier
   buildCommand: pip install gunicorn -r requirements.txt
@@ -9,9 +9,9 @@ services:
   plan: free
   autoDeploy: false
   envVars:
-  - key: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+  - key: LINE_CHANNEL_ACCESS_TOKEN
     sync: false
-  - key: ${{ secrets.LINE_CHANNEL_SECRET }}
+  - key: LINE_CHANNEL_SECRET
     sync: false
 
 # - type: web
