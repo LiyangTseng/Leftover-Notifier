@@ -5,8 +5,6 @@ import os
 
 def load_credentials():
     credentials = {}
-    # channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
-    # channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 
     credentials['type'] = os.getenv('type', None)
     credentials['project_id'] = os.getenv('project_id', None)

@@ -1,18 +1,19 @@
 '''
 Handle user requests/response
 '''
-import pandas as pd
 from database_manager import GS_DatabaseManager
 
 class TextHandler:
-    def __init__(self, do_fuzzy_matching=False):
-        self.keyword_to_tab = {"剩菜": "Leftovers", "食材": "Ingredients"}
+    def __init__(self, database_type="google_sheet", do_fuzzy_matching=False):
+        self.keywords = ["剩菜", "食材"]
         self.do_fuzzy_matching = do_fuzzy_matching
 
-        # TODO: use hierarchy to use database manager
-        gs_credential_path = "gs_credentials.json"
-        gs_url = 'https://docs.google.com/spreadsheets/d/1HbBhLKTvTGv54dy-eM8YVKn7FiWU8XbmOHyPWcUM7Oc/edit#gid=0'
-        self.dm = GS_DatabaseManager(gs_credential_path, gs_url)
+        if database_type == "google_sheet":
+            self.dm = GS_DatabaseManager()
+        elif database_type == "SQL":
+            raise Exception("Haven't implment yet")
+        else:
+            raise Exception("Database not available")
 
 
     def process_requests(self, text):
@@ -20,22 +21,31 @@ class TextHandler:
         Ｃonnect with Database Manager object to process use requests
         '''
 
-        keyword = self.fuzzy_matching(text) if self.do_fuzzy_matching else text
+        text = self.fuzzy_matching(text) if self.do_fuzzy_matching else text
+        keyword = self.spot_keyword(text)
 
-        if keyword not in self.keyword_to_tab.keys():
-            raise Exception("not a valid keyword, the valid keywords are {}".format(list(self.keyword_to_tab.keys())))
+        if not keyword:
+            return None
+        else:
+            info = self.dm.query(keyword)
+            reply = self.format_reply(info)
+            return reply
         
-        sheet_name = self.keyword_to_tab[keyword]
+    def spot_keyword(self, text):
+        if self.do_fuzzy_matching:
+            # TODO: text processing 
+            pass
 
-        # TODO: use hierarchy to use database manager
-        info = self.dm.get_sheet_data(sheet_name)
-        return self.process_reply(info)
-    
-    def process_reply(self, worksheet_outputs):
+        for keyword in self.keywords:
+            if keyword in text:
+                return keyword
+        return None
+
+    def format_reply(self, worksheet_outputs):
         reply = ""
         for row in worksheet_outputs:
             reply += "{}: {}\n".format(row['name'], row['quantity'])
-        return reply
+        return reply.strip()
 
     def fuzzy_matching(self, text):
         '''
@@ -46,5 +56,4 @@ class TextHandler:
 if __name__ == "__main__":
     th = TextHandler()
     data = th.process_requests("食材")
-    # data = pd.DataFrame(data)
     print(data)
