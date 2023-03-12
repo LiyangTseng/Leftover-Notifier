@@ -16,4 +16,4 @@ services:
     
 - type: web
   name: clock
-  start_command: python clock.py
+  startCommand: python clock.py
