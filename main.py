@@ -39,8 +39,8 @@ def linebot():
         print("reply", reply)        
         if not reply:
             line_bot_api.reply_message(tk,TextSendMessage(reply))
-    except:
-        print("erorr occurs", body)
+    except Exception as e:
+        print("erorr occurs. request body: {}\n, exception: {}", body, e)
     return 'OK'
 
 if __name__ == "__main__":
