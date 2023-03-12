@@ -2,6 +2,13 @@
 line-bot-sdk
 Flask
 # access google sheets
-pandas
 gspread
 google-auth
+# data processing
+pandas
+matplotlib
+dataframe_image
+# upload image
+pyimgur
+# scheduling
+APScheduler

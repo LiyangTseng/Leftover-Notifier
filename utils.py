@@ -1,9 +1,9 @@
-'''
-Manually handle credentials verifications regarding gspread since Render uses Github project
-'''
 import os
 
 def load_credentials():
+    '''
+    Manually handle credentials verifications regarding gspread since Render uses Github project
+    '''
     credentials = {}
 
     credentials['type'] = os.getenv('type', None)
@@ -18,3 +18,6 @@ def load_credentials():
     credentials['client_x509_cert_url'] = os.getenv('client_x509_cert_url', None)
 
     return credentials
+
+    
+

@@ -4,8 +4,8 @@ Handle database I/O
 
 from google.oauth2.service_account import Credentials
 import gspread
-import pandas as pd
-from credential_loader import load_credentials
+
+from utils import load_credentials
 
 class DatabaseManager:
     '''
@@ -44,5 +44,7 @@ class GS_DatabaseManager(DatabaseManager):
  
 if __name__ == "__main__":
     dm = GS_DatabaseManager()
-    data = pd.DataFrame(dm.query("Leftovers"))
-    print(data)
+    # leftovers = dm.query("剩菜")
+    ingredients = dm.query("食材")
+    # print(leftovers)
+    # print(ingredients)

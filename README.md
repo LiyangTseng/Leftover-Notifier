@@ -10,8 +10,10 @@ pip install -r requirements.txt
 ```
 2. Register Render
 - Follow [this page](https://ithelp.ithome.com.tw/articles/10283836) for Render registration and usage.
+- Follow [this page](https://lkw75.com/render) for LineBot on Render.
 3. Apply for Google Sheet API
 - Follow the [steps](https://www.learncodewithmike.com/2021/06/pandas-and-google-sheets.html) to set up Google Sheet API.
 - To use Google Sheet credentials while not leak the API secrets on public Github repo, store all the environment variables on Render manually.
+- Refer to this [solution](https://github.com/firebase/firebase-admin-python/issues/188) if encountering issues regarding *private_key* in gspread credentials. 
 ## Refenreces
 The LineBot source code is modified from [here](https://steam.oxxostudio.tw/category/python/example/line-webhook.html). While the original project deploy the chatbot on ngrok, I turn to Render for its stability.

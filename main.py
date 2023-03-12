@@ -33,11 +33,12 @@ def linebot():
 
             th = TextHandler()
             reply = th.process_requests(msg)
-            
-            print("reply", reply)
         else:
             reply = '現在只支援自動回覆文字訊息噢～'
-        line_bot_api.reply_message(tk,TextSendMessage(reply))
+
+        print("reply", reply)        
+        if not reply:
+            line_bot_api.reply_message(tk,TextSendMessage(reply))
     except:
         print("erorr occurs", body)
     return 'OK'
