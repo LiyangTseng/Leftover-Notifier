@@ -16,7 +16,8 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def linebot():
-    body = request.get_data(as_text=True)                    
+    body = request.get_data(as_text=True)                  
+    print("DEBUG Request:",request)   
     try:
         json_data = json.loads(body)                         
         channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
@@ -40,7 +41,7 @@ def linebot():
         if not reply:
             line_bot_api.reply_message(tk,TextSendMessage(reply))
     except Exception as e:
-        print("erorr occurs. request body: {}\n, exception: {}", body, e)
+        print(f"erorr occurs. request body: {body}\n, exception: {e}")
     return 'OK'
 
 if __name__ == "__main__":
