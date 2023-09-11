@@ -43,10 +43,10 @@ class TextHandler:
 
     def get_imgur_link(self, image_local_path):
         client_id = os.getenv('IMGUR_Client_ID', None)
-        
+
         if not client_id:
             raise Exception("Could not load $IMGUR_Client_ID")
-        
+
         im = pyimgur.Imgur(client_id)
         upload_image = im.upload_image(image_local_path, title="Uploaded with PyImgur")
         return upload_image.link
@@ -63,11 +63,11 @@ class TextHandler:
         image_path = os.path.join(IMG_DIR, filename)
         dfi.export(df_styled, image_path, "matplotlib")
         return image_path
-    
-        
+
+
     def spot_keyword(self, text):
         if self.do_fuzzy_matching:
-            # TODO: text processing 
+            # TODO: text processing
             pass
 
         for keyword in self.keywords:

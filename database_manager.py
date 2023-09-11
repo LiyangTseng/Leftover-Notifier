@@ -30,18 +30,18 @@ class GS_DatabaseManager(DatabaseManager):
         gs = gspread.authorize(creds)
         gs_url = 'https://docs.google.com/spreadsheets/d/1HbBhLKTvTGv54dy-eM8YVKn7FiWU8XbmOHyPWcUM7Oc/edit#gid=0'
         self.sheet = gs.open_by_url(gs_url)
-    
+
         self.keyword_to_sheet = {"剩菜": "Leftovers", "食材": "Ingredients"}
         self.sheet_names = []
         sheet_num = len(self.sheet.worksheets())
         for i in range(sheet_num):
-            self.sheet_names.append(self.sheet.get_worksheet(i).title)     
+            self.sheet_names.append(self.sheet.get_worksheet(i).title)
 
     def query(self, keyword):
         sheet_name = self.keyword_to_sheet[keyword]
         worksheet = self.sheet.worksheet(sheet_name)
         return worksheet.get_all_records()
- 
+
 if __name__ == "__main__":
     dm = GS_DatabaseManager()
     # leftovers = dm.query("剩菜")
